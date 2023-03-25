@@ -26,7 +26,7 @@ const ItemCount = () => {
                 </button>
                 {count}
                 <button onClick={add} className="btn" type="button">
-                <FaPlus />
+                    <FaPlus />
                 </button>
             </div>
         </div>

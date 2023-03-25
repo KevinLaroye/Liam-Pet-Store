@@ -3,52 +3,49 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import Item from './Item'
 
+
+
 const ItemList = (props) => {
 
-  const [items, setItems] = useState([])
+  const [items, setItems] = useState(props.inventory)
+
+
 
   useEffect(() => {
 
-    if (props.categoryid === undefined) {
-      
-      const getItems = new Promise(((res, rej) => {
-        setTimeout(() => {
-
-          fetch('https://fakestoreapi.com/products')
-            .then(res => res.json())
-            .then(data => res(data))
-            .catch(error => rej(error))
-        }, 2000);
-      }))
-
-      getItems
-        .then(data => setItems(data))
-        .catch(error => console.log(error))
-
+    if (props.categoryid !== undefined) {
+      const filteredItems = props.inventory.filter(item => item.category === props.categoryid)
+      setItems(filteredItems)
     } else {
-
-      fetch(`https://fakestoreapi.com/products/category/${props.categoryid}`)
-        .then(res => res.json())
-        .then(data => setItems(data))
-
+      setItems(props.inventory)
     }
 
+  }, [props.categoryid, props.inventory])
 
-  }, [props.categoryid])
 
-
-  console.log(items)
 
   return (
-    <>
-      {items.map(item =>
-        <Item
-          id={item.id}
-          name={item.title}
-          price={item.price}
-          img={item.image}
-        />)}
-    </>
+
+    props.inventory
+
+      ?
+
+      <>
+        {items && items.map(item =>
+          <Item
+            key={item.id}
+            itemId={item.id}
+            name={item.name}
+            price={item.price}
+            img={item.img}
+            item={item}
+          />)}
+      </>
+
+      :
+
+      <h1>...Cargando</h1>
+
   )
 }
 
