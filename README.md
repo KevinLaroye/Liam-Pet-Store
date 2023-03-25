@@ -18,3 +18,6 @@ Para utilizar la aplicación, sigue estos pasos:
 - Agrega los productos que deseas comprar al carrito de compras
 - Navega al carrito de compras para finalizar la compra
 
+
+https://user-images.githubusercontent.com/83381845/227697279-416d205e-0b47-4778-83d6-60adcdf1098f.mp4
+
